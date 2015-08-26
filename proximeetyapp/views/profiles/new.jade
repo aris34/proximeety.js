@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+    h1.
+        #{title}
+    form#formAddProfile(name="addprofile",method="post",action="/profiles")
+        p Username: 
+            input#inputUsername(type="text", placeholder="username", name="username")
+        p email:
+            input#inputEmail(type="text", placeholder="name@mail.com", name="email")
+        p Password: 
+            input#inputPassword(type="text", name="password")
+        p
+            button#btnSubmit(type="submit") submit

@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+    h1.
+         #{title}
+    ul
+         each profile, i in profiles
+            li
+                = profile.username + ' | '
+                = profile.email + ' | '
+                = profile.password + ' '
+                
+                a(href='/profiles/#{profile._id}/edit') Edit  &nbsp
+               
+                
+                a(href='/profiles/#{profile._id}') Show
+                
+                form(action='/profiles/#{profile._id}/delete',method='post',enctype='application/x-www-form-urlencoded')
+                    input(type='hidden',value='DELETE',name='_method')
+                    button(type='submit').
+                        Delete
+                p
+

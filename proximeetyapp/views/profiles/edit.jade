@@ -1,0 +1,17 @@
+extends ../layout
+
+block content
+    h1.
+        Profile ID #{profile._id}
+    form(action='/profiles/#{profile._id}/edit',method='post',name='updateprofile',enctype='application/x-www-form-urlencoded')
+        p Username: 
+            input#inputUsername(type='text', value='#{profile.username}', name='username')
+        p Email: 
+            input#inputEmail(type='text', value='#{profile.email}', name='email')
+        p Password: 
+            input#inputPassword(type='text', value='#{profile.password}', name='password')
+        p 
+            input(type='hidden',value='PUT',name='_method')
+        p 
+            button#btnSubmit(type='submit').
+                Update
