@@ -69,7 +69,24 @@ router.route('/').post(function(req, res) {
         deviceId : deviceId
     }, function (err, profile) {
         if (err) {
-            res.send("Problem occured while adding information to the database (profile).");
+            console.log("Problem while creating new profile.");
+
+            // Find the username in the database
+            mongoose.model('Profile').find({username: username}, function (err, profile) {
+                // If username is not found
+                if(err) {
+                    console.log('username: ' + username + ' was not found.');
+                }
+                // If id is found, send appropriate JSON response
+                else
+                {
+                    var message = {
+                        type : "Error",
+                        text : "Username already exists!"
+                    };
+                    res.json(message);
+                }
+            });
         }
         else {
             console.log('POST creating new profile, profile.deviceId: ' + profile.deviceId);
