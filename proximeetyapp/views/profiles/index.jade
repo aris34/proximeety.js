@@ -8,16 +8,23 @@ block content
             li
                 = profile.username + ' | '
                 = profile.email + ' | '
-                = profile.password + ' '
+                = profile.password + ' | '
+                = profile.deviceId + ' - '
                 
-                a(href='/profiles/#{profile._id}/edit') Edit  &nbsp
-               
+                a(href='/profiles/#{profile._id}/edit') Edit Profile  
+                &nbsp|&nbsp 
                 
-                a(href='/profiles/#{profile._id}') Show
+                a(href='/profiles/#{profile._id}') Show Profile
+                &nbsp|&nbsp
+                
+                a(href='/clues/new/#{profile._id}') Add Clue
+                &nbsp|&nbsp
+                
+                a(href='/clues/ownerId=#{profile._id}') Show Clues
                 
                 form(action='/profiles/#{profile._id}/delete',method='post',enctype='application/x-www-form-urlencoded')
                     input(type='hidden',value='DELETE',name='_method')
-                    button(type='submit').
+                    button(type='submit'). 
                         Delete
                 p
 

@@ -8,8 +8,8 @@ var express = require('express'),
 
 // Any requests to this controller must pass through the 'use' function
 // Source: method-override
-router.use(bodyParser.urlencoded({ extended: true }))
-router.use(methodOverride(function(req, res){
+router.use(bodyParser.urlencoded({ extended: true }));
+router.use(methodOverride(function (req, res) {
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
         var method = req.body._method
         delete req.body._method
@@ -57,17 +57,20 @@ router.route('/').post(function(req, res) {
     var username = req.body.username;
     var email = req.body.email;
     var password = req.body.password;
+    var deviceId = req.body.deviceId;
 
     // Call the 'create' function for the database
     mongoose.model('Profile').create({
         username: username,
         email: email,
-        password: password
+        password: password,
+        deviceId : deviceId
     }, function (err, profile) {
         if (err) {
             res.send("Problem occured while adding information to the database (profile).");
         }
         else {
+            console.log('POST creating new profile, profile.deviceId: ' + profile.deviceId);
             // Profile has been created
             console.log('POST creating new profile: ' + profile);
 
@@ -152,7 +155,7 @@ router.route('/:id').get(function(req, res) {
     });
 });
 
-// GET and update an individual profile by MongoDB
+// GET and edit an individual profile by MongoDB
 router.get('/:id/edit', function(req, res) {
     console.log('router.get /:id/edit');
     
@@ -180,6 +183,8 @@ router.get('/:id/edit', function(req, res) {
         }
     });
 });
+
+
 
 // PUT to update a profile by ID
 router.put('/:id/edit', function(req, res) {
