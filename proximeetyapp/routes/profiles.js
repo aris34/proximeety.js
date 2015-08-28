@@ -20,7 +20,7 @@ router.use(methodOverride(function (req, res) {
 
 // REST operations for profiles
 
-// GET all profiles
+/************ GET all profiles ************/
 router.route('/').get(function(req, res, next) {
     console.log('route/.get');
 
@@ -35,14 +35,16 @@ router.route('/').get(function(req, res, next) {
                   // HTML response will render the index.jade file in the views/profiles folder
                   // 'profiles' is set to be an accessible variable in the jade view
                   html: function(){
-                      res.render('profiles/index', {
+                    console.log('HTML response');
+                    res.render('profiles/index', {
                           title: 'Profiles',
                           "profiles" : profiles
                       });
                   },
                   // JSON response shows all profiles in JSON format
                   json: function(){
-                      res.json(infophotos);     // ??????
+                    console.log('JSON response');
+                    res.json(profiles);     // ??????
                   }
             });
           }

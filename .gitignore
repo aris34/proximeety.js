@@ -31,3 +31,4 @@ node_modules
 db/
 
 # Other files
+commands.txt
