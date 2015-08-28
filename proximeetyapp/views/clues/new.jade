@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+    h1.
+        #{title} #{ownerId}
+    form#formAddClue(name="addclue",method="post",action="/clues")
+        p Question: 
+            input#inputQuestion(type="text", placeholder="I like...", name="question")
+        p Answer:
+            input#inputAnswer(type="text", name="answer")
+        p Order Number:
+            input#inputOrderNumber(type="number", name="orderNumber")
+        p
+            button#btnSubmit(type="submit") submit
+            input(type='hidden',value="#{ownerId}",name='ownerId')

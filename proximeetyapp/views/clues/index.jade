@@ -1,0 +1,21 @@
+extends ../layout
+
+block content
+    h1.
+         #{title}
+    ul
+         each clue, i in clues
+            li
+                = clue.question + ' | '
+                = clue.answer + ' | '
+                = clue.orderNumber + ' | '
+                = clue.updated
+                
+                form(action='/clues/#{clue._id}/delete',method='post',enctype='application/x-www-form-urlencoded')
+                    input(type='hidden',value='DELETE',name='_method')
+                    button(type='submit'). 
+                        Delete
+                
+                p
+                
+
