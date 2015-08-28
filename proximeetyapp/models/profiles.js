@@ -7,7 +7,7 @@ var Schema = mongoose.Schema;
 
 // Create the profileSchema
 var profileSchema = Schema({
-    username: String,
+    username: { type: String, unique : true },
     password: String,
     deviceId: String,
     clues: [{type: Schema.Types.ObjectId, ref: 'Clue' }]
