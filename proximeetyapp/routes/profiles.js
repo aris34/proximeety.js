@@ -80,11 +80,9 @@ router.route('/').post(function(req, res) {
                 // If id is found, send appropriate JSON response
                 else
                 {
-                    var message = {
-                        type : "Error",
-                        text : "Username already exists!"
-                    };
-                    res.json(message);
+                    res.json({
+                        _id : "-1"
+                    });
                 }
             });
         }
@@ -118,37 +116,37 @@ router.get('/new', function(req, res) {
 });
 
 // Route middleware to validate :id
-router.param('id', function(req, res, next, id) {
-    console.log('Validating that id: ' + id + ' exists...');
+// router.param('id', function(req, res, next, id) {
+//     console.log('Validating that id: ' + id + ' exists...');
     
-    // Find the ID in the database
-    mongoose.model('Profile').findById(id, function (err, profile) {
-        // If id is not found, respond with 404
-        if(err) {
-            console.log('id: ' + id + ' was not found.');
-            res.status(404)
-            var err = new Error('Not Found');
-            err.status = 404;
-            res.format({
-                html: function(){
-                    next(err);
-                },
-                json: function(){
-                    res.json({ message : err.status + ' ' + err});
-                }
-            });
-        // If id is found, continue
-        }
-        else
-        {
-            console.log(profile);
-            // Once validation is done, save the new item in the req
-            req.id = id;
-            // go to next
-            next();
-        }
-    });
-});
+//     // Find the ID in the database
+//     mongoose.model('Profile').findById(id, function (err, profile) {
+//         // If id is not found, respond with 404
+//         if(err) {
+//             console.log('id: ' + id + ' was not found.');
+//             res.status(404)
+//             var err = new Error('Not Found');
+//             err.status = 404;
+//             res.format({
+//                 html: function(){
+//                     next(err);
+//                 },
+//                 json: function(){
+//                     res.json({ message : err.status + ' ' + err});
+//                 }
+//             });
+//         // If id is found, continue
+//         }
+//         else
+//         {
+//             console.log(profile);
+//             // Once validation is done, save the new item in the req
+//             req.id = id;
+//             // go to next
+//             next();
+//         }
+//     });
+// });
 
 // GET an individual profile by ID and display it
 router.route('/:id').get(function(req, res) {
@@ -170,6 +168,32 @@ router.route('/:id').get(function(req, res) {
                     res.json(profile);
                 }
             });
+        }
+    });
+});
+
+// Search by username and password and return the profile if found
+router.get('/login/:username/:password', function (req, res) {
+    console.log('/profiles/login/ ' + req.params.username + " " + req.params.password);
+    var username = req.params.username;
+    var password = req.params.password;
+
+    // Search the database for a profile with username and password
+    mongoose.model('Profile').findOne( {username: username }, function (err, profile) {
+        if(err) {
+            console.log("Error");
+        }
+        else {
+            if(profile != null && profile.password === password) {
+                console.log("Found");
+                res.json(profile);
+            }
+            else {
+                console.log("Not found");
+                res.json({
+                        _id : "-1"
+                });
+            }
         }
     });
 });
