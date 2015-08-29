@@ -53,7 +53,7 @@ router.post('/', function(req, res) {
         }
         else {
             console.log('Added new clue with id: ' + clue._id + ' for profile: ' + clue._ownerId);
-            res.redirect("/profiles");
+            res.json(clue);
         }
     });
 });
@@ -124,26 +124,6 @@ router.delete('/:id/delete', function (req, res){
         }
     });
 });
-
-
-
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
