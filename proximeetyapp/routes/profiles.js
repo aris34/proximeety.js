@@ -44,7 +44,9 @@ router.route('/').get(function(req, res, next) {
                   // JSON response shows all profiles in JSON format
                   json: function(){
                     console.log('JSON response');
-                    res.json(profiles);     // ??????
+                    var result = {
+                        "Profiles": profiles};
+                    res.json(result);     // ??????
                   }
             });
           }
