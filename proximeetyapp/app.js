@@ -8,11 +8,13 @@ var bodyParser = require('body-parser');
 
 var db = require('./models/db'),
     profile = require('./models/profiles'),
-    clue = require('./models/clues');
+    clue = require('./models/clues'),
+    connection = require('./models/connections');
 
 var routes = require('./routes/index'),
     profiles = require('./routes/profiles'),
-    clues = require('./routes/clues');
+    clues = require('./routes/clues'),
+    connections = require('./routes/connections');
 
 
 var app = express();
@@ -34,6 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/profiles', profiles);
 app.use('/clues', clues);
+app.use('/connections', connections)
 
 //app.use('/', routes);
 //app.use('/users', users);

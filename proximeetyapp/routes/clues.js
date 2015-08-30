@@ -58,7 +58,7 @@ router.post('/', function(req, res) {
     });
 });
 
-/********** Show clues with specific _ownerId **********/
+/********** GET clues with specific _ownerId **********/
 router.get('/ownerId=:id', function (req, res) {
     console.log('/ownerId=:id - GET');
     
