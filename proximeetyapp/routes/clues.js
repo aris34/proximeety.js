@@ -81,7 +81,7 @@ router.get('/ownerId=:id', function (req, res) {
                 },
                 // JSON response shows all profiles in JSON format
                 json: function(){
-                  //res.json(infophotos);     // ??????
+                  res.json(clues);     
                 }
         });
         }
