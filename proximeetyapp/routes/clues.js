@@ -60,7 +60,7 @@ router.post('/', function(req, res) {
 
 /********** GET clues with specific _ownerId **********/
 router.get('/ownerId=:id', function (req, res) {
-    console.log('/ownerId=:id - GET');
+    console.log('/ownerId=:id - GET, ' + Date().toString());
     
     var ownerId = req.params.id;
     
@@ -124,7 +124,36 @@ router.delete('/:id/delete', function (req, res){
         }
     });
 });
-    
+
+/********** UPDATE a clue with a specific id **********/
+router.put('/:id/update', function(req, res) {
+    //console.log('Update clue with id: ' + req.params.id);
+
+    // Get values from PUT request
+    var id = req.params.id;
+    var ownerId = req.body.ownerId;
+    var question = req.body.question;
+    var answer = req.body.answer;
+    var updated = Date().toString(); // Now
+
+    console.log('vars: ' + id + " " + ownerId + " " + question + " " + answer + " " + updated);
+
+    // Find the document by id:
+    mongoose.model('Clue').findById(req.params.id, function (err, clue) {
+        clue.update({
+            question: question,
+            answer: answer,
+            updated: updated
+            }, function (err, clueNew) {
+                if(err) {
+                    console.log("Error while updating clue with id: " + id);
+                }
+                else {
+                    res.json(clueNew);
+                }
+        })
+    });
+});
     
     
     
