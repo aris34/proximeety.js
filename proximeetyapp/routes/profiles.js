@@ -198,6 +198,31 @@ router.get('/login/:username/:password', function (req, res) {
     });
 });
 
+// Search by username only and return the profile if found
+router.get('/login/:username', function (req, res) {
+    console.log('/profiles/login/ ' + req.params.username);
+    var username = req.params.username;
+
+    // Search the database for a profile with username and password
+    mongoose.model('Profile').findOne( {username: username }, function (err, profile) {
+        if(err) {
+            console.log("Error");
+        }
+        else {
+            if(profile != null) {
+                console.log("Found");
+                res.json(profile);
+            }
+            else {
+                console.log("Not found");
+                res.json({
+                        _id : "-1"
+                });
+            }
+        }
+    });
+});
+
 // GET and edit an individual profile by MongoDB
 router.get('/:id/edit', function(req, res) {
     console.log('router.get /:id/edit');
