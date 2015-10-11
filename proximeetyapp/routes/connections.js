@@ -55,6 +55,7 @@ router.get('/owners/user1Id=:id1&user2Id=:id2', function(req,res) {
 	var _user2Id = req.params.id2;
 
 	mongoose.model('Connection').find( { $and: [ { _user1Id: _user1Id }, { _user2Id: _user2Id } ] },
+		
 		function (err, connection) {
 			if(err) {
 				res.json(err);

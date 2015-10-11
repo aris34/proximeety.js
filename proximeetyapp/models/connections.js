@@ -7,7 +7,7 @@ var connectionSchema = Schema({
 	_user2Id: 	{ type: Schema.Types.ObjectId, ref: 'Profile' },
 	timesMet: 	{ type: Number, default: 0 },
 	lastMet: 	{ type: Date, default: Date.now },
-	lastGotUpdate: { type: Date, default: Date.now }
+	lastUpdate: { type: Date, default: Date.now }
 });
 
 // Create the Connections model
