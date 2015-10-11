@@ -47,6 +47,30 @@ router.get('/:id', function(req,res) {
 	res.json('OK');
 });
 
+/********** GET one connection with specific owners **********/
+router.get('/owners/user1Id=:id1&user2Id=:id2', function(req,res) {
+	console.log('GET one connection: ' + req.params.id1 + ' ' + req.params.id2);
+
+	var _user1Id = req.params.id1;
+	var _user2Id = req.params.id2;
+
+	mongoose.model('Connection').find( { $and: [ { _user1Id: _user1Id }, { _user2Id: _user2Id } ] },
+		function (err, connection) {
+			if(err) {
+				res.json(err);
+			}
+			else {
+				if(connection != null) {
+                	console.log("Found");
+                	res.json(connection);
+	            }
+	            else {
+	                console.log("Not found");
+	                res.json({ _id : "-1" });
+	            }
+			}
+		});
+});
 
 /********** POST a new Connection **********/
 router.post('/', function(req, res) {
@@ -76,6 +100,42 @@ router.post('/', function(req, res) {
     });
 });
 
+
+
+/********** UPDATE a connection with specific owners **********/
+router.put('/update', function(req, res) {
+	// Get values from PUT request
+	var _id = req.body._id;
+	var _user1Id = req.body._user1Id;
+	var _user2Id = req.body._user2Id;
+	var timesMet = req.body.timesMet;
+	var lastMet = req.body.lastMet;
+	var lastUpdate = req.body.lastUpdate;
+
+	console.log('Update connection: ' + _id + ' ' + lastMet + ' ' + lastUpdate);
+
+	// Find the document by id and update it
+	mongoose.model('Connection').findById(_id, function(err, connection) {
+		if(err) {
+			res.json(err);
+		}
+		else {
+			connection.update({
+				timesMet : timesMet,
+				lastMet : lastMet,
+				lastUpdate : lastUpdate
+			}, function (err, connectionNew) {
+				if(err) {
+					console.log("Error while updating connection with id: " + _id);
+					res.json(err);
+				}
+				else {
+					res.json(connectionNew);
+				}
+			})
+		}
+	});
+});
 
 
 
