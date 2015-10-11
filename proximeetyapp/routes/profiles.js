@@ -198,7 +198,7 @@ router.get('/login/:username/:password', function (req, res) {
     });
 });
 
-// Search by username only and return the profile if found
+// Search Profile by username only and return the profile if found
 router.get('/login/:username', function (req, res) {
     console.log('/profiles/login/ ' + req.params.username);
     var username = req.params.username;
@@ -211,6 +211,32 @@ router.get('/login/:username', function (req, res) {
         else {
             if(profile != null) {
                 console.log("Found");
+                res.json(profile);
+            }
+            else {
+                console.log("Not found");
+                res.json({
+                        _id : "-1"
+                });
+            }
+        }
+    });
+});
+
+// Search Profile by deviceId only and return the profile if found
+router.get('/deviceId/:deviceId', function (req, res) {
+    console.log('/profiles/ Search by deviceId ' + req.params.deviceId);
+    var deviceId = req.params.deviceId;
+
+    // Search the database for a profile with username and password
+    mongoose.model('Profile').findOne( {deviceId: deviceId }, function (err, profile) {
+        if(err) {
+            console.log("Error");
+        }
+        else {
+            if(profile != null) {
+                console.log("Found");
+                profile.password = "";
                 res.json(profile);
             }
             else {
