@@ -36,7 +36,8 @@ router.get('/userId=:id', function(req,res) {
 				res.send(err);
 			} else {
 				for(var i in connections) {
-					console.log(connections._id);
+					console.log(connections[i].lastMet);
+					connections[i].lastMet = connections[i].lastMet.toISOString();
 				}
 				res.json(connections);
 			}
