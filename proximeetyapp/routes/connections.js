@@ -35,14 +35,16 @@ router.get('/userId=:id', function(req,res) {
 				console.log('Error while getting connection' + err);
 				res.send(err);
 			} else {
-				for(var i in connections) {
-					console.log(connections[i].lastMet);
-					var dt = connections[i].lastMet;
-				}
-				var test = ({ _id : userId},
-				{date : dt}
-				);
-				res.send(test);
+				// for(var i in connections) {
+				// 	console.log(connections[i].lastMet);
+				// 	var dt = connections[i].lastMet;
+				// }
+				//var test = ({ _id : userId},
+				//{date : dt}
+				//);
+				//res.send(test);
+				res.set({ 'content-type': 'application/json; charset=utf-8' });
+				res.json(connections);
 			}
 		});
 });
