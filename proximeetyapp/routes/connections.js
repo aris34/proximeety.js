@@ -43,7 +43,7 @@ router.get('/userId=:id', function(req,res) {
 				//{date : dt}
 				//);
 				//res.send(test);
-				res.set({ 'content-type': 'application/json; charset=utf-8' });
+				//res.set({ 'content-type': 'application/json; charset=utf-8' });
 				res.json(connections);
 			}
 		});
@@ -53,7 +53,9 @@ router.get('/userId=:id', function(req,res) {
 router.get('/:id', function(req,res) {
 	console.log('GET - One connection with id= ' + req.params.id);
 
-	res.json('OK');
+	mongoose.model('Connection').findById(req.params.id, function (err, connection) {
+		res.json(connection);
+	});
 });
 
 /********** GET one connection with specific owners **********/
