@@ -30,12 +30,15 @@ router.get('/userId=:id', function(req,res) {
 	var userId = req.params.id;
 
 	mongoose.model('Connection').find( { $or: [ { _user1Id: userId }, { _user2Id: userId } ] },
-		function (err, connection) {
+		function (err, connections) {
 			if(err) {
 				console.log('Error while getting connection' + err);
 				res.send(err);
 			} else {
-				res.json(connection);
+				for(var i in connections) {
+					console.log(connections._id);
+				}
+				res.json(connections);
 			}
 		});
 });
