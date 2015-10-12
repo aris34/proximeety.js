@@ -37,9 +37,12 @@ router.get('/userId=:id', function(req,res) {
 			} else {
 				for(var i in connections) {
 					console.log(connections[i].lastMet);
-					connections[i].lastMet = connections[i].lastMet.toISOString();
+					var dt = connections[i].lastMet;
 				}
-				res.json(connections);
+				var test = ({ _id : _id},
+				{date : dt}
+				);
+				res.json(date);
 			}
 		});
 });
