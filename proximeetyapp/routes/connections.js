@@ -39,7 +39,7 @@ router.get('/userId=:id', function(req,res) {
 					console.log(connections[i].lastMet);
 					var dt = connections[i].lastMet;
 				}
-				var test = ({ _id : _id},
+				var test = ({ _id : userId},
 				{date : dt}
 				);
 				res.json(test);
