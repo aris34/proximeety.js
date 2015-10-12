@@ -42,7 +42,7 @@ router.get('/userId=:id', function(req,res) {
 				var test = ({ _id : userId},
 				{date : dt}
 				);
-				res.json(test);
+				res.send(test);
 			}
 		});
 });
