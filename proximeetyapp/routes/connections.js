@@ -78,10 +78,12 @@ router.post('/', function(req, res) {
 	console.log('POST - Connections');
 
 	// Get values from POST request
+	var _id = req.body._id;
 	var _user1Id = req.body._user1Id;
 	var _user2Id = req.body._user2Id;
 	var timesMet = req.body.timesMet;
-	//var lastMet = req.body.lastMet;
+	var lastMet = req.body.lastMet;
+	var lastUpdate = req.body.lastUpdate;
 
 	console.log(_user1Id + ' ' + _user2Id, ' ' + timesMet );
 
@@ -89,7 +91,9 @@ router.post('/', function(req, res) {
     mongoose.model('Connection').create({
     	_user1Id : _user1Id,
     	_user2Id : _user2Id,
-    	timesMet : timesMet
+    	timesMet : timesMet,
+    	lastMet : lastMet,
+    	lastUpdate : lastUpdate
     }, function (err, connection) {
     	if(err) {
     		console.log('Error while creating a connection' + err);
@@ -114,6 +118,8 @@ router.put('/update', function(req, res) {
 	var lastUpdate = req.body.lastUpdate;
 
 	console.log('Update connection: ' + _id + ' ' + lastMet + ' ' + lastUpdate);
+	
+
 
 	// Find the document by id and update it
 	mongoose.model('Connection').findById(_id, function(err, connection) {
