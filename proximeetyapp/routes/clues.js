@@ -146,12 +146,12 @@ router.put('/:id/update', function(req, res) {
             question: question,
             answer: answer,
             updated: updated
-            }, function (err, clueNew) {
+            }, function (err, clue) {
                 if(err) {
                     console.log("Error while updating clue with id: " + id);
                 }
                 else {
-                    res.json(clueNew);
+                    res.json(clue);
                 }
         })
     });
