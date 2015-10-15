@@ -17,13 +17,6 @@ var Connection = mongoose.model('Connection', connectionSchema);
 Connection.find({}, function(err, connections) {
     for(var i in connections) {
         console.log(i + ". " + connections[i]);
-        //connections[i].remove();
-    }
-});
-
-Connection.find({}, function(err, connections) {
-    for(var i in connections) {
-        console.log(i + ". " + connections[i]);
         connections[i].remove();
     }
 });

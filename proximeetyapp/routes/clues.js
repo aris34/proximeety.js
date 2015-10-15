@@ -40,13 +40,15 @@ router.post('/', function(req, res) {
     var answer = req.body.answer;
     var ownerId = req.body.ownerId;
     var orderNumber = req.body.orderNumber;
+    var updated = req.body.updated;
     
     // Call the 'create' function for the database
     mongoose.model('Clue').create({
         _ownerId:       ownerId,
         question:       question,
         answer:         answer,
-        orderNumber:    orderNumber
+        orderNumber:    orderNumber,
+        updated:        updated
     }, function (err, clue) {
         if (err) {
             res.send('Error while adding information to the database (clue).');

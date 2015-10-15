@@ -7,7 +7,7 @@ var clueSchema = Schema({
     question:       String,
     answer:         String,
     orderNumber:    Number,
-    updated:        { type: Date, default: Date.now }
+    updated:        String
 });
 
 // Create the Clue model
@@ -17,7 +17,7 @@ Clue.find({}, function(err, clues) {
     var i=0;
     for(var i in clues) {
         console.log(i + ". " + clues[i]._ownerId + " " + clues[i].question + " " + clues[i].answer);
-        //clues[i].remove();
+        clues[i].remove();
     }
     console.log("i: ", i);
 });
@@ -25,8 +25,8 @@ Clue.find({}, function(err, clues) {
 Clue.find({}, function(err, clues) {
     var i=0;
     for(var i in clues) {
-        console.log(i + ". " + clues[i]._ownerId + " " + clues[i].question + " " + clues[i].answer);
-        clues[i].remove();
+        console.log(i + ". " + clues[i]._ownerId + " " + clues[i].question + " " + clues[i].answer + " " + clues[i].updated);
+        //clues[i].remove();
     }
     console.log("i: ", i);
 });

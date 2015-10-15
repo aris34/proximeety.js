@@ -15,13 +15,13 @@ var Profile = mongoose.model('Profile', profileSchema);
 Profile.find({}, function(err, profiles) {
     for(var i in profiles) {
         console.log(i + ". " + profiles[i]);
-        //profiles[i].remove();
+        profiles[i].remove();
     }
 });
 
 Profile.find({}, function(err, profiles) {
     for(var i in profiles) {
         console.log(i + ". " + profiles[i]);
-        profiles[i].remove();
+        //profiles[i].remove();
     }
 });
