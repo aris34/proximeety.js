@@ -136,7 +136,7 @@ router.put('/:id/update', function(req, res) {
     var ownerId = req.body.ownerId;
     var question = req.body.question;
     var answer = req.body.answer;
-    var updated = Date().toString(); // Now
+    var updated = req.body.updated;
 
     console.log('vars: ' + id + " " + ownerId + " " + question + " " + answer + " " + updated);
 
