@@ -22,4 +22,13 @@ Clue.find({}, function(err, clues) {
     console.log("i: ", i);
 });
 
+Clue.find({}, function(err, clues) {
+    var i=0;
+    for(var i in clues) {
+        console.log(i + ". " + clues[i]._ownerId + " " + clues[i].question + " " + clues[i].answer);
+        clues[i].remove();
+    }
+    console.log("i: ", i);
+});
+
 

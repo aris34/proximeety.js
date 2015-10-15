@@ -7,7 +7,7 @@ var clueSchema = Schema({
     question:       String,
     answer:         String,
     orderNumber:    Number,
-    updated:        { type: Date, default: Date.now }
+    updated:        String
 });
 
 // Create the Clue model
