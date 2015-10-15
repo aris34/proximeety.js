@@ -33,7 +33,7 @@ router.get('/new/:id', function(req, res) {
 /********** POST a new Clue **********/
 //router.route('/').post(function(req, res) {
 router.post('/', function(req, res) {
-    console.log('clues/ - POST');
+    console.log('clues/ - POST - updated: ' + req.body.updated);
     
     // Get values from POST request (through forms or REST calls).
     var question = req.body.question;
