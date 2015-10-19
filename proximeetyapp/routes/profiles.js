@@ -287,18 +287,17 @@ router.put('/:id/edit', function(req, res) {
     console.log('router.put /:id/edit');
     
     // Get values from POST request (through forms or REST calls).
+    var _id = req.body._id;
     var username = req.body.username;
-    var email = req.body.email;
     var password = req.body.password;
     var active = req.body.active;
+
+    console.log("**** UPDATING PROFILE: " + username + " " )
     
     // Find the document by ID
-    mongoose.model('Profile').findById(req.id, function (err, profile) {
+    mongoose.model('Profile').findById(_id, function (err, profile) {
         // Update the document
         profile.update({
-            username: username,
-            email: email,
-            password: password,
             active: active
         }, function (err, profileID) {
             if (err) {
