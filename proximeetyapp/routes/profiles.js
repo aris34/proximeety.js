@@ -312,6 +312,7 @@ router.put('/:id/edit', function(req, res) {
                          },
                          //JSON responds showing the updated values
                         json: function(){
+                            console.log("Sending JSON response: " + profile);
                                res.json(profile);
                          }
                       });
