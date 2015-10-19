@@ -11,7 +11,7 @@ var profileSchema = Schema({
     password: String,
     deviceId: String,
     clues: [{type: Schema.Types.ObjectId, ref: 'Clue' }],
-    active: Boolean
+    active: String
 });
 
 // Create the Profile model
