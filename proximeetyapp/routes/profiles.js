@@ -60,13 +60,15 @@ router.route('/').post(function(req, res) {
     var email = req.body.email;
     var password = req.body.password;
     var deviceId = req.body.deviceId;
+    var active = req.body.active;
 
     // Call the 'create' function for the database
     mongoose.model('Profile').create({
         username: username,
         email: email,
         password: password,
-        deviceId : deviceId
+        deviceId : deviceId,
+        active : active
     }, function (err, profile) {
         if (err) {
             console.log("Problem while creating new profile.");
@@ -288,6 +290,7 @@ router.put('/:id/edit', function(req, res) {
     var username = req.body.username;
     var email = req.body.email;
     var password = req.body.password;
+    var active = req.body.active;
     
     // Find the document by ID
     mongoose.model('Profile').findById(req.id, function (err, profile) {
@@ -295,7 +298,8 @@ router.put('/:id/edit', function(req, res) {
         profile.update({
             username: username,
             email: email,
-            password: password
+            password: password,
+            active: active
         }, function (err, profileID) {
             if (err) {
                 res.send("There was a problem updating the information to the database: " + err);
