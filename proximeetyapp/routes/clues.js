@@ -136,6 +136,7 @@ router.put('/:id/update', function(req, res) {
     var ownerId = req.body.ownerId;
     var question = req.body.question;
     var answer = req.body.answer;
+    var orderNumber = req.body.orderNumber;
     var updated = req.body.updated;
 
     console.log('vars: ' + id + " " + ownerId + " " + question + " " + answer + " " + updated);
@@ -145,6 +146,7 @@ router.put('/:id/update', function(req, res) {
         clue.update({
             question: question,
             answer: answer,
+            orderNumber : orderNumber,
             updated: updated
             }, function (err, clue) {
                 if(err) {

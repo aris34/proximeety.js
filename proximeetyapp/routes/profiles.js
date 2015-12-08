@@ -5,6 +5,9 @@ var express = require('express'),
     bodyParser = require('body-parser'),            // parses information from POST
     methodOverride = require('method-override');    // used to manipulate POST
 
+var client = require("socket.io-client");
+var socket = client.connect("http://localhost:3001");
+// client.emit("chat message", "asdf");
 
 // Any requests to this controller must pass through the 'use' function
 // Source: method-override
@@ -16,7 +19,6 @@ router.use(methodOverride(function (req, res) {
         return method
     }
 }))
-
 
 // REST operations for profiles
 
@@ -36,6 +38,11 @@ router.route('/').get(function(req, res, next) {
                   // 'profiles' is set to be an accessible variable in the jade view
                   html: function(){
                     console.log('HTML response');
+
+                    for(var i in profiles) {
+                        socket.emit("from server", profiles[i].username);
+                    }
+                    
                     res.render('profiles/index', {
                           title: 'Profiles',
                           "profiles" : profiles
@@ -44,6 +51,11 @@ router.route('/').get(function(req, res, next) {
                   // JSON response shows all profiles in JSON format
                   json: function(){
                     console.log('JSON response');
+                    
+                    for(var i in profiles) {
+                        socket.emit("chat message", profiles[i].username);
+                    }
+                    
                     res.json(profiles); 
                   }
             });
