@@ -7,7 +7,7 @@ var connectionSchema = Schema({
 	_user2Id: 	{ type: Schema.Types.ObjectId, ref: 'Profile' },
 	timesMet: 	{ type: Number, default: 0 },
 	faceToFace: { type: Number, default: 0 },
-	lastFaceToFace String,
+	lastFaceToFace: String,
 	lastMet: 	String,
 	lastUpdate: String
 });
