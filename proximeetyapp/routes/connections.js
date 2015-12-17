@@ -93,6 +93,8 @@ router.post('/', function(req, res) {
 	var _user1Id = req.body._user1Id;
 	var _user2Id = req.body._user2Id;
 	var timesMet = req.body.timesMet;
+	var faceToFace = req.body.faceToFace;
+	var lastFaceToFace = req.body.lastFaceToFace;
 	var lastMet = req.body.lastMet;
 	var lastUpdate = req.body.lastUpdate;
 
@@ -103,6 +105,8 @@ router.post('/', function(req, res) {
     	_user1Id : _user1Id,
     	_user2Id : _user2Id,
     	timesMet : timesMet,
+    	faceToFace : faceToFace,
+    	lastFaceToFace : lastFaceToFace,
     	lastMet : lastMet,
     	lastUpdate : lastUpdate
     }, function (err, connection) {
@@ -125,6 +129,8 @@ router.put('/update', function(req, res) {
 	var _user1Id = req.body._user1Id;
 	var _user2Id = req.body._user2Id;
 	var timesMet = req.body.timesMet;
+	var faceToFace = req.body.faceToFace;
+	var lastFaceToFace = req.body.lastFaceToFace;
 	var lastMet = req.body.lastMet;
 	var lastUpdate = req.body.lastUpdate;
 
@@ -140,6 +146,8 @@ router.put('/update', function(req, res) {
 		else {
 			connection.update({
 				timesMet : timesMet,
+				faceToFace : faceToFace,
+				lastFaceToFace : lastFaceToFace,
 				lastMet : lastMet,
 				lastUpdate : lastUpdate
 			}, function (err, connectionNew) {
