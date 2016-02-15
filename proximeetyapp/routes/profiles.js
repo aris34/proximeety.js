@@ -81,6 +81,7 @@ router.route('/').post(function(req, res) {
         email: email,
         password: password,
         deviceId : deviceId,
+        clues : clues,
         active : active
     }, function (err, profile) {
         if (err) {
