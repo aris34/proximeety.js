@@ -307,7 +307,7 @@ router.put('/:id/edit', function(req, res) {
     var active = req.body.active;
     var clues = req.body.clues;
 
-    console.log("**** UPDATING PROFILE: " + username + " " )
+    console.log("**** UPDATING PROFILE: " + username + " clues: " + clues);
     
     // Find the document by ID
     mongoose.model('Profile').findById(_id, function (err, profile) {
