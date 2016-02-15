@@ -7,7 +7,7 @@ var profileSchema = Schema({
     username: { type: String, unique : true },
     password: String,
     deviceId: String,
-    clues: [{type: Schema.Types.ObjectId, ref: 'Clue' }]
+    clues: Number
 });
 
 var Profile = mongoose.model('Profile', profileSchema);

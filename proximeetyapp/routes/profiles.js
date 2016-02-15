@@ -73,6 +73,7 @@ router.route('/').post(function(req, res) {
     var password = req.body.password;
     var deviceId = req.body.deviceId;
     var active = req.body.active;
+    var clues = req.body.clues;
 
     // Call the 'create' function for the database
     mongoose.model('Profile').create({
@@ -303,6 +304,7 @@ router.put('/:id/edit', function(req, res) {
     var username = req.body.username;
     var password = req.body.password;
     var active = req.body.active;
+    var clues = req.body.clues;
 
     console.log("**** UPDATING PROFILE: " + username + " " )
     

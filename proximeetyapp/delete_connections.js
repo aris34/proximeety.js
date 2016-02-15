@@ -4,11 +4,13 @@ var Schema = mongoose.Schema;
 
 
 var connectionSchema = Schema({
-	_user1Id: 	{ type: Schema.Types.ObjectId, ref: 'Profile' },
-	_user2Id: 	{ type: Schema.Types.ObjectId, ref: 'Profile' },
-	timesMet: 	{ type: Number, default: 0 },
-	lastMet: 	String,
-	lastUpdate: String
+    _user1Id:   { type: Schema.Types.ObjectId, ref: 'Profile' },
+    _user2Id:   { type: Schema.Types.ObjectId, ref: 'Profile' },
+    timesMet:   { type: Number, default: 0 },
+    faceToFace: { type: Number, default: 0 },
+    lastFaceToFace: String,
+    lastMet:    String,
+    lastUpdate: String
 });
 
 // Create the Connections model
