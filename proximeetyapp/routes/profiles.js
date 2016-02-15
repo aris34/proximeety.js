@@ -313,7 +313,8 @@ router.put('/:id/edit', function(req, res) {
     mongoose.model('Profile').findById(_id, function (err, profile) {
         // Update the document
         profile.update({
-            active: active
+            active: active,
+            clues: clues
         }, function (err, profileID) {
             if (err) {
                 res.send("There was a problem updating the information to the database: " + err);
