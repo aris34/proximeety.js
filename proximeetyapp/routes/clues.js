@@ -41,6 +41,7 @@ router.post('/', function(req, res) {
     var ownerId = req.body.ownerId;
     var orderNumber = req.body.orderNumber;
     var updated = req.body.updated;
+    var likes = req.body.likes;
     
     // Call the 'create' function for the database
     mongoose.model('Clue').create({
@@ -48,7 +49,8 @@ router.post('/', function(req, res) {
         question:       question,
         answer:         answer,
         orderNumber:    orderNumber,
-        updated:        updated
+        updated:        updated,
+        likes:          likes 
     }, function (err, clue) {
         if (err) {
             res.send('Error while adding information to the database (clue).');
@@ -138,6 +140,7 @@ router.put('/:id/update', function(req, res) {
     var answer = req.body.answer;
     var orderNumber = req.body.orderNumber;
     var updated = req.body.updated;
+    var likes = req.body.likes;
 
     console.log('vars: ' + id + " " + ownerId + " " + question + " " + answer + " " + updated);
 
@@ -147,7 +150,8 @@ router.put('/:id/update', function(req, res) {
             question: question,
             answer: answer,
             orderNumber : orderNumber,
-            updated: updated
+            updated: updated,
+            likes: likes
             }, function (err, clue) {
                 if(err) {
                     console.log("Error while updating clue with id: " + id);
