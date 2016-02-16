@@ -25,7 +25,8 @@ Clue.find({}, function(err, clues) {
 Clue.find({}, function(err, clues) {
     var i=0;
     for(var i in clues) {
-        console.log(i + ". " + clues[i]._ownerId + " " + clues[i].question + " " + clues[i].answer + " " + clues[i].updated + " " + clues[i].orderNumber);
+        //console.log(i + ". " + clues[i]._ownerId + " " + clues[i].question + " " + clues[i].answer + " " + clues[i].updated + " " + clues[i].orderNumber);
+        console.log(i + ". " + clues[i]);
         //clues[i].remove();
     }
     console.log("i: ", i);
