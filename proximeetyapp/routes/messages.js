@@ -30,7 +30,9 @@ router.get('/conversation/senderId=:sender&recipientId=:recipient', function(req
 	var _senderId = req.params.sender;
 	var _recipientId = req.params.recipient;
 
-	mongoose.model('Message').find( { $and: [ { _senderId: _senderId }, { _recipientId: _recipientId } ] },
+	
+
+	mongoose.model('Message').find( $or: [ { $and: [ { _senderId: _senderId }, { _recipientId: _recipientId } ] }, { $and: [ { _senderId: _recipientId }, { _recipientId: _senderId } ] } ] },
 		
 		function (err, message) {
 			if(err) {
