@@ -10,11 +10,13 @@ var db = require('./models/db'),
     profile = require('./models/profiles'),
     clue = require('./models/clues'),
     connection = require('./models/connections');
+    //message = require('./models/messages');
 
 var routes = require('./routes/index'),
     profiles = require('./routes/profiles'),
     clues = require('./routes/clues'),
     connections = require('./routes/connections');
+    //messages = require('./routes/messages');
 
 
 var app = express();
@@ -37,9 +39,8 @@ app.use('/', routes);
 app.use('/profiles', profiles);
 app.use('/clues', clues);
 app.use('/connections', connections)
+//app.use('/messages', messages)
 
-//app.use('/', routes);
-//app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

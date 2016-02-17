@@ -46,7 +46,7 @@ router.get('/userId=:id', function(req,res) {
 				//res.set({ 'content-type': 'application/json; charset=utf-8' });
 				res.json(connections);
 			}
-		});
+		}).sort('lastMet');
 });
 
 /********** GET One Connection **********/
