@@ -7,7 +7,8 @@ var clueSchema = Schema({
     question:       String,
     answer:         String,
     orderNumber:    Number,
-    updated:        String
+    updated:        String,
+    likes:          Number
 });
 
 // Create the Clue model

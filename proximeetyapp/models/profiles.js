@@ -11,7 +11,11 @@ var profileSchema = Schema({
     password: String,
     deviceId: String,
     clues: Number,
-    active: String
+    active: String,
+    email: String,
+    age: Number,
+    gender: String,
+    community: String
 });
 
 // Create the Profile model

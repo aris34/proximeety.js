@@ -69,20 +69,26 @@ router.route('/').post(function(req, res) {
 
     // Get values from POST request (through forms or REST calls).
     var username = req.body.username;
-    var email = req.body.email;
     var password = req.body.password;
     var deviceId = req.body.deviceId;
     var active = req.body.active;
     var clues = req.body.clues;
+    var email = req.body.email;
+    var age = req.body.age;
+    var gender = req.body.gender;
+    var community = req.body.community;
 
     // Call the 'create' function for the database
     mongoose.model('Profile').create({
         username: username,
-        email: email,
         password: password,
         deviceId : deviceId,
         clues : clues,
-        active : active
+        active : active,
+        email : email,
+        age : age,
+        gender : gender,
+        community : community
     }, function (err, profile) {
         if (err) {
             console.log("Problem while creating new profile.");
@@ -306,6 +312,10 @@ router.put('/:id/edit', function(req, res) {
     var password = req.body.password;
     var active = req.body.active;
     var clues = req.body.clues;
+    var email = req.body.email;
+    var age = req.body.age;
+    var gender = req.body.gender;
+    var community = req.body.community;
 
     console.log("**** UPDATING PROFILE: " + username + " clues: " + clues);
     
