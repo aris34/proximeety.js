@@ -97,6 +97,7 @@ router.post('/', function(req, res) {
 	var lastFaceToFace = req.body.lastFaceToFace;
 	var lastMet = req.body.lastMet;
 	var lastUpdate = req.body.lastUpdate;
+	var blocked = req.body.blocked;
 
 	console.log(_user1Id + ' ' + _user2Id, ' ' + timesMet );
 
@@ -108,7 +109,8 @@ router.post('/', function(req, res) {
     	faceToFace : faceToFace,
     	lastFaceToFace : lastFaceToFace,
     	lastMet : lastMet,
-    	lastUpdate : lastUpdate
+    	lastUpdate : lastUpdate,
+    	blocked : blocked
     }, function (err, connection) {
     	if(err) {
     		console.log('Error while creating a connection' + err);
@@ -133,6 +135,7 @@ router.put('/update', function(req, res) {
 	var lastFaceToFace = req.body.lastFaceToFace;
 	var lastMet = req.body.lastMet;
 	var lastUpdate = req.body.lastUpdate;
+	var blocked = req.body.blocked;
 
 	console.log('Update connection: ' + _id + ' ' + lastMet + ' ' + lastUpdate);
 	
@@ -149,7 +152,8 @@ router.put('/update', function(req, res) {
 				faceToFace : faceToFace,
 				lastFaceToFace : lastFaceToFace,
 				lastMet : lastMet,
-				lastUpdate : lastUpdate
+				lastUpdate : lastUpdate,
+				blocked : blocked
 			}, function (err, connectionNew) {
 				if(err) {
 					console.log("Error while updating connection with id: " + _id);

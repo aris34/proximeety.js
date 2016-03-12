@@ -10,7 +10,8 @@ var connectionSchema = Schema({
     faceToFace: { type: Number, default: 0 },
     lastFaceToFace: String,
     lastMet:    String,
-    lastUpdate: String
+    lastUpdate: String,
+    blocked:    String
 });
 
 // Create the Connections model
