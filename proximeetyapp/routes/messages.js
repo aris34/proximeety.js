@@ -58,9 +58,9 @@ router.get('/conversation/senderId=:sender&recipientId=:recipient', function(req
 router.get('/conversation/senderId=:sender', function(req,res) {
     console.log('GET conversation: ' + req.params.sender);
 
-    var _senderId = req.body.sender;
+    var _senderId = req.params.sender;
 
-    mongoose.model('Message').find({ _senderId: senderId},
+    mongoose.model('Message').find({ _senderId: _senderId},
 
         function (err, message) {
             if(err) {
@@ -85,7 +85,7 @@ router.get('/conversation/recipientId=:recipient', function(req,res) {
 
     var _recipientId = req.params.recipient;
 
-    mongoose.model('Message').find({ _recipientId: recipientId},
+    mongoose.model('Message').find({ _recipientId: _recipientId},
  
         function (err, message) {
             if(err) {
