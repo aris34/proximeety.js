@@ -54,6 +54,56 @@ router.get('/conversation/senderId=:sender&recipientId=:recipient', function(req
 
 });
 
+/********** GET all messages with specific sender **********/
+router.get('/conversation/senderId=:sender', function(req,res) {
+    console.log('GET conversation: ' + req.params.sender);
+
+    var _senderId = req.params.sender;
+
+    mongoose.model('Message').find({ _senderId: senderId},
+
+        function (err, message) {
+            if(err) {
+                res.json(err);
+            }
+            else {
+                if(message != null) {
+                    console.log("Found");
+                    res.json(message);
+                }
+                else {
+                    console.log("Not found");
+                    res.json({ _id : "-1" });
+                }
+            }
+        });
+});
+
+/********** GET all messages with specific recipient **********/
+router.get('/conversation/senderId=:recipient', function(req,res) {
+    console.log('GET conversation: ' + req.params.sender);
+
+    var _recipientId = req.params.recipient;
+
+    mongoose.model('Message').find({ _recipientId: recipientId},
+ 
+        function (err, message) {
+            if(err) {
+                res.json(err);
+            }
+            else {
+                if(message != null) {
+                    console.log("Found");
+                    res.json(message);
+                }
+                else {
+                    console.log("Not found");
+                    res.json({ _id : "-1" });
+                }
+            }
+        });
+});
+
 /********** POST a new Message **********/
 router.post('/', function(req, res) {
     console.log('messages/ - POST: ' + req.body.messageText);
