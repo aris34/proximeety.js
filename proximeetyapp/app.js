@@ -9,13 +9,17 @@ var db = require('./models/db'),
     profile = require('./models/profiles'),
     clue = require('./models/clues'),
     connection = require('./models/connections'),
-    message = require('./models/messages');
+    message = require('./models/messages'),
+    like = require('./models/likes'),
+    achievement = require('./models/achievements');
 
 var routes = require('./routes/index'),
     profiles = require('./routes/profiles'),
     clues = require('./routes/clues'),
     connections = require('./routes/connections'),
-    messages = require('./routes/messages');
+    messages = require('./routes/messages'),
+    likes = require('./routes/likes'),
+    achievements = require('./routes/achievements');
 
 
 var app = express();
@@ -39,6 +43,8 @@ app.use('/profiles', profiles);
 app.use('/clues', clues);
 app.use('/connections', connections);
 app.use('/messages', messages);
+app.use('/likes', likes);
+app.use('achievements', achievements);
 
 
 // catch 404 and forward to error handler
