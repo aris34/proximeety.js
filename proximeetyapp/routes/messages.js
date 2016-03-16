@@ -80,7 +80,7 @@ router.get('/conversation/senderId=:sender', function(req,res) {
 });
 
 /********** GET all messages with specific recipient **********/
-router.get('/conversation/senderId=:recipient', function(req,res) {
+router.get('/conversation/recipientId=:recipient', function(req,res) {
     console.log('GET conversation: ' + req.params.sender);
 
     var _recipientId = req.params.recipient;
