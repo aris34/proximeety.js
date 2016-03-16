@@ -69,7 +69,7 @@ router.get('/conversation/senderId=:sender', function(req,res) {
             else {
                 if(message != null) {
                     console.log("Found");
-                    res.json(message.size());
+                    res.json(message);
                 }
                 else {
                     console.log("Not found");
