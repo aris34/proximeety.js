@@ -30,5 +30,8 @@ node_modules
 # Database folder
 db/
 
+# bin folder
+bin/
+
 # Other files
 commands.txt
