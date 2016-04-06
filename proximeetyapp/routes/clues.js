@@ -79,7 +79,7 @@ router.get('/ownerId=:id', function (req, res) {
                 // 'profiles' is set to be an accessible variable in the jade view
                 html: function(){
                   res.render('clues/index', {
-                      title: 'Clues for profile: ' + ownerId,
+                      title: 'Whispers for user: ' + ownerId,
                       "clues" : clues
                   });
                 },

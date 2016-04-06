@@ -7,7 +7,12 @@
 var app = require('../app');
 var debug = require('debug')('proximeetyapp:server');
 var http = require('http');
-
+// var auth = require("http-auth");
+// var basic = auth.basic({
+//   authRealm: "Private area",
+//   authFile: "/../htpasswd",
+//   authType: "basic"
+// });
 /**
  * Get port from environment and store in Express.
  */

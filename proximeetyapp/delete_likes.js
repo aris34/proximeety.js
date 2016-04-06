@@ -11,18 +11,26 @@ var likeSchema = Schema({
 // Create the Like model
 Like = mongoose.model('Like', likeSchema);
 
-Like.find({}, function(err, likes) {
-    var i=0;
-    for(var i in likes) {
-        console.log(i + ". " + likes[i]);
-        likes[i].remove();
-    }
-});
+// Like.find({}, function(err, likes) {
+//     var i=0;
+//     for(var i in likes) {
+//         console.log(i + ". " + likes[i]);
+//         likes[i].remove();
+//     }
+// });
 
 Like.find({}, function(err, likes) {
     var i=0;
     for(var i in likes) {
         console.log(i + ". " + likes[i]);
         //likes.[i].remove;
+    }
+});
+
+Like.find({_ownerId : '56e95d58313609d8446b6c25'}, function(err, likes) {
+    var i=0;
+    for(var i in likes) {
+        console.log(i + ". " + likes[i]);
+        likes[i].remove();
     }
 });

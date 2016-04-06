@@ -7,7 +7,6 @@ var express = require('express'),
 
 var client = require("socket.io-client");
 var socket = client.connect("http://localhost:3001");
-// client.emit("chat message", "asdf");
 
 // Any requests to this controller must pass through the 'use' function
 // Source: method-override
@@ -172,9 +171,9 @@ router.get('/new', function(req, res) {
 
 // GET an individual profile by ID and display it
 router.route('/:id').get(function(req, res) {
-    console.log('route /:id .get');
+    console.log('route /:id .get ' + req.params.id);
 
-    mongoose.model('Profile').findById(req.id, function (err, profile) {
+    mongoose.model('Profile').findById(req.params.id, function (err, profile) {
         if (err) {
             console.log('GET Error: There was a problem retrieving: ' + err);
         } 
@@ -276,7 +275,7 @@ router.get('/:id/edit', function(req, res) {
     console.log('router.get /:id/edit');
     
     // Search for the profile in MongoDB
-    mongoose.model('Profile').findById(req.id, function (err, profile) {
+    mongoose.model('Profile').findById(req.params.id, function (err, profile) {
         if (err) {
         console.log('GET Error: There was a problem retrieving: ' + err);
         } 
@@ -351,7 +350,7 @@ router.delete('/:id/delete', function (req, res){
     console.log('router.delete /:id/delete');
     
     // find profile by ID
-    mongoose.model('Profile').findById(req.id, function (err, profile) {
+    mongoose.model('Profile').findById(req.params.id, function (err, profile) {
         if (err) {
             return console.error(err);
         }

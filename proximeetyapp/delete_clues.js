@@ -17,20 +17,38 @@ Clue = mongoose.model('Clue', clueSchema);
 Clue.find({}, function(err, clues) {
     var i=0;
     for(var i in clues) {
-        console.log(i + ". " + clues[i]._ownerId + " " + clues[i].question + " " + clues[i].answer);
-        clues[i].remove();
-    }
-    console.log("i: ", i);
-});
-
-Clue.find({}, function(err, clues) {
-    var i=0;
-    for(var i in clues) {
-        //console.log(i + ". " + clues[i]._ownerId + " " + clues[i].question + " " + clues[i].answer + " " + clues[i].updated + " " + clues[i].orderNumber);
         console.log(i + ". " + clues[i]);
         //clues[i].remove();
     }
     console.log("i: ", i);
 });
 
+Clue.find({ _ownerId : '56e95d58313609d8446b6c25'}, function(err, clues) {
+    var i=0;
+    for(var i in clues) {
+        console.log(i + ". " + clues[i]);
+        //clues[i].remove();
+    }
+});
 
+Clue.find({ _id : '56f3d4f8abd66b6e765cdabf'}, function(err, clues) {
+    var i=0;
+    for(var i in clues) {
+        console.log(i + ". " + clues[i]);
+        //clues[i].remove();
+    }
+});
+
+Clue.findById('56f3d4f8abd66b6e765cdabf', function (err, clue) {
+        // Update the document
+        clue.update({
+            likes: 11
+        }, function (err, clueID) {
+            if (err) {
+                console.log("There was a problem updating the information to the database: " + err);
+            }
+            else {
+                console.log("Update OK");
+            }
+        })
+});

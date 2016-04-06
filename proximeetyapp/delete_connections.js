@@ -20,7 +20,7 @@ var Connection = mongoose.model('Connection', connectionSchema);
 Connection.find({}, function(err, connections) {
     for(var i in connections) {
         console.log(i + ". " + connections[i]);
-        connections[i].remove();
+        //connections[i].remove();
     }
 });
 
@@ -28,5 +28,18 @@ Connection.find({}, function(err, connections) {
     for(var i in connections) {
         console.log(i + ". " + connections[i]);
         //connections[i].remove();
+    }
+});
+
+Connection.find({ _user2Id : '56e95d58313609d8446b6c25'}, function(err, connections) {
+    for(var i in connections) {
+        console.log(i + ". " + connections[i]);
+        //connections[i].remove();
+    }
+});
+
+Connection.find( {$or: [{ _user1Id : '56e9018a313609d8446b6bec'}, { _user2Id : '56e9018a313609d8446b6bec'}] }, function(err, connections) {
+    for(var i in connections) {
+        console.log(i + ". " + connections[i]);
     }
 });
