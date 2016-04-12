@@ -23,7 +23,7 @@ Clue.find({}, function(err, clues) {
     console.log("i: ", i);
 });
 
-Clue.find({ _ownerId : '56e95d58313609d8446b6c25'}, function(err, clues) {
+Clue.find({ _ownerId : '56e95fb7313609d8446b6c27'}, function(err, clues) {
     var i=0;
     for(var i in clues) {
         console.log(i + ". " + clues[i]);
@@ -31,7 +31,7 @@ Clue.find({ _ownerId : '56e95d58313609d8446b6c25'}, function(err, clues) {
     }
 });
 
-Clue.find({ _id : '56f3d4f8abd66b6e765cdabf'}, function(err, clues) {
+Clue.find({ _id : '56e95fb7313609d8446b6c27'}, function(err, clues) {
     var i=0;
     for(var i in clues) {
         console.log(i + ". " + clues[i]);

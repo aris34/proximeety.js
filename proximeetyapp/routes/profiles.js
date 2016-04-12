@@ -7,7 +7,7 @@ var express = require('express'),
 
 var client = require("socket.io-client");
 var socket = client.connect("http://localhost:3001");
-
+var fs = require('fs');
 // Any requests to this controller must pass through the 'use' function
 // Source: method-override
 router.use(bodyParser.urlencoded({ extended: true }));
@@ -18,6 +18,44 @@ router.use(methodOverride(function (req, res) {
         return method
     }
 }))
+
+/* POST the profile picture */
+router.post('/pics/upload', function(req,res){
+    // The picture is received in a basse64 encoded string
+    base64_decode(req.body.image, req.body._id + '.jpg');
+    res.json("OK");
+});
+
+// function to encode file data to base64 encoded string
+function base64_encode(file) {
+    // read binary data
+    var bitmap = fs.readFileSync(file);
+    // convert binary data to base64 encoded string
+    return new Buffer(bitmap).toString('base64');
+}
+
+// function to create file from base64 encoded string
+function base64_decode(base64str, file) {
+    // create buffer object from base64 encoded string, tell the constructor that the string is base64 encoded
+    var bitmap = new Buffer(base64str, 'base64');
+    // write buffer to file
+    fs.writeFileSync('./pics/' + file, bitmap);
+    console.log('File created from base64 encoded string');
+}
+
+router.get('/pics/:id', function(req,res) {
+    
+    var id = req.params.id;
+
+    //res.sendFile('/Users/Aris/Development/NodeJS/proximeety/proximeetyapp/pics/' + id + '.jpg');
+    var base64str = base64_encode('/Users/Aris/Development/NodeJS/proximeety/proximeetyapp/pics/' + id + '.jpg'); 
+
+    res.json(
+        { _id : id,
+          image : base64str  
+        }
+        );
+});
 
 // REST operations for profiles
 
@@ -336,7 +374,7 @@ router.put('/:id/edit', function(req, res) {
                          },
                          //JSON responds showing the updated values
                         json: function(){
-                            console.log("Sending JSON response: " + profile);
+                            //console.log("Sending JSON response: " + profile);
                                res.json(profile);
                          }
                       });

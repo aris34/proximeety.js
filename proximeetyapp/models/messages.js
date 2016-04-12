@@ -9,5 +9,5 @@ var messageSchema = Schema({
     timeSent:    	String,
 });
 
-// Create the Clue model
+// Create the Message model
 mongoose.model('Message', messageSchema);

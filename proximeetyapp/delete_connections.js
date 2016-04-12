@@ -31,7 +31,7 @@ Connection.find({}, function(err, connections) {
     }
 });
 
-Connection.find({ _user2Id : '56e95d58313609d8446b6c25'}, function(err, connections) {
+Connection.find({ _user2Id : '57044d9bd4112b5ba33ecf4c'}, function(err, connections) {
     for(var i in connections) {
         console.log(i + ". " + connections[i]);
         //connections[i].remove();
@@ -42,4 +42,18 @@ Connection.find( {$or: [{ _user1Id : '56e9018a313609d8446b6bec'}, { _user2Id : '
     for(var i in connections) {
         console.log(i + ". " + connections[i]);
     }
+});
+
+Connection.findById('570d595855a0a52f9b570136', function (err, connection) {
+        // Update the document
+        connection.update({
+            faceToFace: 0
+        }, function (err, connectionID) {
+            if (err) {
+                console.log("There was a problem updating the information to the database: " + err);
+            }
+            else {
+                console.log("Update OK");
+            }
+        })
 });

@@ -31,14 +31,14 @@ Profile.find({}, function(err, profiles) {
     }
 });
 
-Profile.find({ username : 'mysteryGuy' }, function(err, profiles) {
+Profile.find({ username : 'test' }, function(err, profiles) {
     for(var i in profiles) {
         console.log(i + ". " + profiles[i]);
         //profiles[i].remove();
     }
 });
 
-Profile.find({ _id : '56e91efb313609d8446b6bff' }, function(err, profiles) {
+Profile.find({ _id : '56e95d58313609d8446b6c25' }, function(err, profiles) {
     for(var i in profiles) {
         console.log(i + ". " + profiles[i]);
         //profiles[i].remove();
