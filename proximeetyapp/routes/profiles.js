@@ -48,7 +48,7 @@ router.get('/pics/:id', function(req,res) {
     var id = req.params.id;
 
     //res.sendFile('/Users/Aris/Development/NodeJS/proximeety/proximeetyapp/pics/' + id + '.jpg');
-    var base64str = base64_encode('/Users/Aris/Development/NodeJS/proximeety/proximeetyapp/pics/' + id + '.jpg'); 
+    var base64str = base64_encode('/home/aris/proximeety.js/proximeetyapp/pics/' + id + '.jpg'); 
 
     res.json(
         { _id : id,
