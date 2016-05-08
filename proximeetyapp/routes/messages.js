@@ -61,15 +61,85 @@ router.get('/conversation/senderId=:sender', function(req,res) {
     var _senderId = req.params.sender;
 
     mongoose.model('Message').find({ _senderId: _senderId},
-
-        function (err, message) {
+        function (err, messages) {
             if(err) {
                 res.json(err);
             }
             else {
-                if(message != null) {
+                if(messages != null) {
                     console.log("Found");
-                    res.json(message);
+
+                    res.format({
+                        // HTML response will render the index.jade file in the views/profiles folder
+                        // 'profiles' is set to be an accessible variable in the jade view
+                        html: function(){
+                            function Contact(message, username) {
+                                this.message = message;
+                                this.username = username;
+                            }
+                            var contacts = {};
+
+                            var index = 0;
+
+                            if(messages.length == 0) {
+                                res.render('messages/index', {
+                                    title: 'Messages',
+                                    "id" : _senderId,
+                                    "messages" : messages,
+                                    "contacts" : contacts,
+                                    "message" : 'This user has not sent any messages'
+                                });
+                            }
+                            for(var i in messages)
+                                console.log('Message: ' + i + '. ' + messages[i]);
+
+                            var maxIndex = messages.length;
+                            counter = 0;
+
+                            for(var c in messages) {
+
+                                var createContact = function(username, message, index) {
+                                    var tempMessage = new Contact(message, username);
+                                    //console.log('tempContact: ' + tempContact.connection._user2Id + ' ' + tempContact.username + ' i: ' + index);
+                                    contacts[index] = tempMessage;
+                                    counter++;
+
+                                    if(counter == maxIndex) {
+                                        res.render('messages/index', {
+                                            title: 'Messages',
+                                            "id" : _senderId,
+                                            "messages" : messages,
+                                            "contacts" : contacts,
+                                            "send_receive" : 'to'
+                                        });
+                                    }
+                                };
+
+                                var getUsername = function(callback) {
+                                    // Get usernames of profiles in connection from database
+                                    var searchId = messages[c]._recipientId;
+                                    var i = c;
+                                    var username = '';
+                                    console.log('Searching for profile with id: ' + searchId);
+                                    mongoose.model('Profile').findById(searchId, function (err, profile) {
+                                        if(profile != null) {
+                                            username = profile.username;
+                                            callback(username, messages[i], i);
+                                        } else {
+                                            username = 'Username not found/deleted. id: ' + searchId;
+                                            callback(username, messages[i], i);
+                                        }
+                                    });
+                                };
+
+                                getUsername(createContact);
+                            }
+                        },
+                        // JSON response shows all profiles in JSON format
+                        json: function(){
+                          res.json(messages);
+                        }
+                    });
                 }
                 else {
                     console.log("Not found");
@@ -87,14 +157,96 @@ router.get('/conversation/recipientId=:recipient', function(req,res) {
 
     mongoose.model('Message').find({ _recipientId: _recipientId},
  
-        function (err, message) {
+        function (err, messages) {
             if(err) {
                 res.json(err);
             }
             else {
-                if(message != null) {
+                if(messages != null) {
                     console.log("Found");
-                    res.json(message);
+
+                    res.format({
+                        // HTML response will render the index.jade file in the views/profiles folder
+                        // 'profiles' is set to be an accessible variable in the jade view
+                        html: function(){
+                            function Contact(message, username) {
+                                this.message = message;
+                                this.username = username;
+                            }
+                            var contacts = {};
+
+                            var index = 0;
+
+                            if(messages.length == 0) {
+                                res.render('messages/index', {
+                                    title: 'Messages',
+                                    "id" : _recipientId,
+                                    "messages" : messages,
+                                    "contacts" : contacts,
+                                    "message" : 'This user has not sent any messages',
+                                    "send_receive" : 'to',
+                                    "username" : _recipientId
+                                });
+                            }
+                            for(var i in messages)
+                                console.log('Message: ' + i + '. ' + messages[i]);
+
+                            var maxIndex = messages.length;
+                            var counter = 0;
+
+                            for(var c in messages) {
+
+                                var createContact = function(myUsername, otherUsername, message, index) {
+                                    var tempMessage = new Contact(message, otherUsername);
+                                    //console.log('tempContact: ' + tempContact.connection._user2Id + ' ' + tempContact.username + ' i: ' + index);
+                                    contacts[index] = tempMessage;
+                                    counter++;
+
+                                    if(counter == maxIndex) {
+                                        res.render('messages/index', {
+                                            title: 'Messages',
+                                            "id" : _recipientId,
+                                            "messages" : messages,
+                                            "contacts" : contacts,
+                                            "send_receive" : 'to',
+                                            "username" : myUsername
+                                        });
+                                    }
+                                };
+
+                                var getAllUsernames = function(callback, myUsername) {
+                                    // Get usernames of profiles in connection from database
+                                    var searchId = messages[c]._senderId;
+                                    var i = c;
+                                    var otherUsername = '';
+                                    
+                                    mongoose.model('Profile').findById(searchId, function (err, profile) {
+                                        if(profile != null) {
+                                            username = profile.username;
+                                            callback(myUsername, otherUsername, messages[i], i);
+                                        } else {
+                                            username = 'Username not found/deleted. id: ' + searchId;
+                                            callback(myUsername, otherUsername, messages[i], i);
+                                        }
+                                    });
+                                };
+
+                                //getAllUsernames(createContact);
+                                var getMyUsername = function() {
+                                    mongoose.model('Profile').findById(_recipientId, function (err, profile) {
+                                        var myUsername = profile.username;
+                                        getAllUsernames(createContact, myUsername);
+                                    });
+                                }
+
+                                getMyUsername();
+                            }
+                        },
+                        // JSON response shows all profiles in JSON format
+                        json: function(){
+                          res.json(messages);
+                        }
+                    });
                 }
                 else {
                     console.log("Not found");

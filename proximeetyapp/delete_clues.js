@@ -15,15 +15,13 @@ var clueSchema = Schema({
 Clue = mongoose.model('Clue', clueSchema);
 
 Clue.find({}, function(err, clues) {
-    var i=0;
     for(var i in clues) {
         console.log(i + ". " + clues[i]);
         //clues[i].remove();
     }
-    console.log("i: ", i);
 });
 
-Clue.find({ _ownerId : '56e95fb7313609d8446b6c27'}, function(err, clues) {
+Clue.find({ _ownerId : '570dece0b5ef48ed1c63d5aa'}, function(err, clues) {
     var i=0;
     for(var i in clues) {
         console.log(i + ". " + clues[i]);

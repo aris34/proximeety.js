@@ -35,16 +35,70 @@ router.get('/userId=:id', function(req,res) {
 				console.log('Error while getting connection' + err);
 				res.send(err);
 			} else {
-				// for(var i in connections) {
-				// 	console.log(connections[i].lastMet);
-				// 	var dt = connections[i].lastMet;
-				// }
-				//var test = ({ _id : userId},
-				//{date : dt}
-				//);
-				//res.send(test);
-				//res.set({ 'content-type': 'application/json; charset=utf-8' });
-				res.json(connections);
+				res.format({
+                  // HTML response
+                  html: function(){
+                  	function Contact(connection, username) {
+                  		this.connection = connection;
+                  		this.username = username;
+                  	}
+                  	var contacts = {};
+
+                  	var index = 0;
+
+                	if(connections.length == 0) {
+                		res.render('connections/index', {
+	                        title: 'Connections',
+	                        "id" : userId,
+	                        "connections" : connections,
+	                        "contacts" : contacts,
+	                        "message" : 'There are no connections for this user'
+	                    });
+                	}
+                  	var maxIndex = connections.length;
+                  	counter = 0;
+                  	for(var c in connections) {
+
+                  		var createContact = function(username, connection, index) {
+                  			var tempContact = new Contact(connection, username);
+                  			console.log('tempContact: ' + tempContact.connection._user2Id + ' ' + tempContact.username + ' i: ' + index);
+                  			contacts[index] = tempContact;
+                  			counter++;
+                  			//console.log('contacts[c]: ' + c + '. ' + contacts[c].connection.id + ' ' + contacts[c].username);
+
+                  			if(counter == maxIndex) {
+                  				res.render('connections/index', {
+			                        title: 'Connections',
+			                        "id" : userId,
+			                        "connections" : connections,
+			                        "contacts" : contacts
+		                     	});
+                  			}
+                  		};
+
+                  		var getUsername = function(callback) {
+                  			// Get usernames of profiles in connection from database
+                  			var searchId;
+                  			if(userId != connections[c]._user1Id)
+                  				searchId = connections[c]._user1Id;
+                  			else
+                  				searchId = connections[c]._user2Id;
+                  			var i = c;
+                  			var username = '';
+	                  		mongoose.model('Profile').findById(searchId, function (err, profile) {
+	                  			username = profile.username;
+	                  			callback(username, connections[i], i);
+	                  		});
+                  		};
+
+                  		getUsername(createContact);
+                  	}
+                  },
+                  // JSON response
+                  json: function(){
+                   	res.json(connections);
+                  }
+            	});
 			}
 		}).sort('lastMet');
 });

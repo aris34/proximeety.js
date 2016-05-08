@@ -1,9 +1,39 @@
 extends ../layout
 
 block content
-    h1.
-        id #{profile._id}
-    p Name: #{profile.username}
-    p Email: #{profile.email}
-    p Password: #{profile.password}
-    p DeviceId: #{profile.deviceId}
+	h1.
+		#{profile.username}
+	
+	| username: 
+	a &nbsp&nbsp&nbsp
+	b #{profile.username}
+	br
+	| id: 
+	a &nbsp&nbsp&nbsp
+	b #{profile._id}
+	br
+	| Email:
+	a &nbsp&nbsp&nbsp
+	b #{profile.email}
+	br
+	| Password: 
+	a &nbsp&nbsp&nbsp
+	b #{profile.password}
+	br
+	| DeviceId: 
+	a &nbsp&nbsp&nbsp
+	b #{profile.deviceId}
+	br
+	br
+
+	a(href='/connections/userId=#{profile._id}') Connections
+	br
+	a(href='/clues/ownerId=#{profile._id}') Whispers
+	br
+	a(href='/messages/conversation/senderId=#{profile._id}') Messages Sent
+	br
+	a(href='/messages/conversation/recipientId=#{profile._id}') Messages Received
+	br
+	a(href='/likes/ownerId=#{profile._id}') Likes
+	br
+	a(href='/achievements/#{profile._id}') Achievements

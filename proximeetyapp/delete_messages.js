@@ -1,5 +1,6 @@
 // Get the mongoose module
 var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/proximeetyappdb');
 var Schema = mongoose.Schema;
 
 var messageSchema = Schema({
@@ -14,9 +15,9 @@ var Message = mongoose.model('Message', messageSchema);
 Message.find({}, function(err, messages) {
     for(var i in messages) {
         console.log(i + ". " + messages[i]);
-        //connections[i].remove();
+        //messages[i].remove();
     }
-});t
+});
 
 Message.find({_senderId : '56e95d58313609d8446b6c25'}, function(err, messages) {
     for(var i in messages) {

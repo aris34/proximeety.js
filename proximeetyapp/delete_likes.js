@@ -19,11 +19,11 @@ Like = mongoose.model('Like', likeSchema);
 //     }
 // });
 
+
 Like.find({}, function(err, likes) {
-    var i=0;
     for(var i in likes) {
         console.log(i + ". " + likes[i]);
-        //likes.[i].remove;
+        //likes[i].remove();
     }
 });
 

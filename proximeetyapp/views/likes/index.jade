@@ -1,0 +1,25 @@
+extends ../layout
+block content
+    h1.
+         #{title} #{send_receive} #{id}
+    ol
+         each whisper, i in whispers
+            li
+                b 
+                    i #{whisper.clue.question} #{whisper.clue.answer} 
+                br
+                | liked on:
+                | #{whisper.like.date}
+                br
+                br
+                | whisper's total likes: 
+                b #{whisper.clue.likes}
+                br
+                | owner:
+                | #{whisper.clue._ownerId}
+                br
+                a(href='/profiles/#{whisper.clue._ownerId}') Go to owner's profile
+                br
+            p
+        p
+    p #{message}

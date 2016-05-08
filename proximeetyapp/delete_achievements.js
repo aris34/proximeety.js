@@ -15,10 +15,9 @@ var achievementSchema = Schema({
 Achievement = mongoose.model('Achievement', achievementSchema);
 
 Achievement.find({}, function(err, achievements) {
-    var i=0;
     for(var i in achievements) {
         console.log(i + ". " + achievements[i]);
-        achievements[i].remove();
+        //achievements[i].remove();
     }
 });
 

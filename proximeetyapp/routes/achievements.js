@@ -23,6 +23,41 @@ router.get('/', function(req,res) {
 	res.json('OK');
 });
 
+/********** GET All Achievements with specific _ownerId **********/
+router.get('/:ownerId', function(req,res) {
+    var _ownerId = req.params.ownerId;
+    console.log('GET - All Achievements for: ' + _ownerId);
+
+    mongoose.model('Achievement').find({ _ownerId : _ownerId}, 
+        function(err, achievements) {
+            if(err) {
+                res.json(err);
+            }
+            else {
+
+                if(achievements.length == 0) {
+                    res.render('achievements/index', {
+                        title: 'Achievements for user',
+                        "id" : _ownerId,
+                        "achievements" : "",
+                        "message" : 'This user has not unlocked any achievements',
+                        "username" : _ownerId
+                    });
+                }
+                else {
+                    res.render('achievements/index', {
+                        title: 'Achievements for user',
+                        "id" : _ownerId,
+                        "achievements" : achievements,
+                        "message" : "",
+                        "username" : _ownerId
+                    });
+                }
+            }
+        }
+    );
+});
+
 /********** POST a new Achievement **********/
 router.post('/', function(req, res) {
     console.log('achievements/ - POST: ' + req.body.text);

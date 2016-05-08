@@ -1,0 +1,21 @@
+extends ../layout
+block content
+    h1.
+         #{title} #{send_receive} #{id}
+    ol
+         each contact, i in contacts
+            li
+                b 
+                    i #{contact.message.messageText}
+                br
+                br
+                | #{send_receive}
+                | #{contact.username}
+                br
+                | time sent:
+                | #{contact.message.timeSent}
+                br
+                br
+            p
+        p
+    p #{message}

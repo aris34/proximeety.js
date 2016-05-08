@@ -1,0 +1,29 @@
+extends ../layout
+block content
+    h1.
+         Connections for #{id}
+    ol
+         each contact, i in contacts
+            li
+                u 
+                    b #{contact.username}
+                br
+                | 
+                times met:
+                a &nbsp&nbsp&nbsp
+                b #{contact.connection.timesMet}
+                br
+                | face2face:
+                a &nbsp&nbsp&nbsp
+                b #{contact.connection.faceToFace}
+                br
+                | last update:
+                a &nbsp&nbsp&nbsp
+                b #{contact.connection.lastUpdate}
+                br
+                | last blocked:
+                a &nbsp&nbsp&nbsp
+                b #{contact.connection.blocked}
+            p
+        p
+    p #{message}

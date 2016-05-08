@@ -31,14 +31,14 @@ Connection.find({}, function(err, connections) {
     }
 });
 
-Connection.find({ _user2Id : '57044d9bd4112b5ba33ecf4c'}, function(err, connections) {
+Connection.find({ _user2Id : '570dece0b5ef48ed1c63d5aa'}, function(err, connections) {
     for(var i in connections) {
         console.log(i + ". " + connections[i]);
         //connections[i].remove();
     }
 });
 
-Connection.find( {$or: [{ _user1Id : '56e9018a313609d8446b6bec'}, { _user2Id : '56e9018a313609d8446b6bec'}] }, function(err, connections) {
+Connection.find( {$or: [{ _user1Id : '56e90cf9313609d8446b6bf3'}, { _user2Id : '56e90cf9313609d8446b6bf3'}] }, function(err, connections) {
     for(var i in connections) {
         console.log(i + ". " + connections[i]);
     }
